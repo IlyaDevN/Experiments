@@ -22,114 +22,113 @@ async function xxx() {
 	await windowAnimate("75%", "0");
 	await carAnimate(shift, shift*2);
 
-	function roadAnimate(first, second) {
-		const animation = roadContainer.animate(
-			[
-				{transform: `translateX(${first})`},
-				{transform: `translateX(${second})`}
-			],
-			{
-				duration: 5000,
-				iterations: Infinity,
-			}
-		)
-		animationsArray.push(animation);
-		return animation.finished;
-	}
-
-	function carAnimate(first, second) {
-		const animation = car.animate(
-			[
-				{transform: `translateX(${first}px)`},
-				{transform: `translateX(${second}px)`}
-			],
-			{
-				duration: 2000,
-				iterations: 1,
-				fill: "forwards",
-			}
-		);
-		animationsArray.push(animation);
-		return animation.finished;
-		
-	}
-
-	function wheelsAnimate() {
-		let animations = [];
-
-		wheelContainers.forEach((wheel) => {
-
-			const animation = wheel.animate(
-			[
-				{ transform: "rotate(0deg)" },
-				{ transform: "rotate(-360deg)" },
-			],
-				{
-					duration: 1000,
-					iterations: Infinity,
-				}
-			)
-			animationsArray.push(animation);
-			animations.push(animation.finished);
-		});
-		
-		return Promise.all(animations);
-	}
-
-	function windowAnimate(first, second) {
-		const animation = carWindow.animate(
-			[
-				{transform: `translateY(${first})`},
-				{transform: `translateY(${second})`}
-			],
-			{
-				duration: 1000,
-				iterations: 1,
-				fill: "forwards"
-			}
-		)
-		animationsArray.push(animation);
-		return animation.finished;
-	}
-
-	function girlAnimate(first, second) {
-		const animation = girl.animate(
-			[
-				{transform: `rotate(${first})`},
-				{transform: `rotate(${second})`},
-			],
-			{
-				duration: 1000,
-				iterations: 1,
-				fill: "forwards"
-			}
-		)
-		animationsArray.push(animation);
-		return animation.finished;
-	}
-
-	function handAnimate(first, second) {
-		const animation = hand.animate(
-			[
-				{transform: `rotate(${first})`},
-				{transform: `rotate(${second})`},
-			],
-			{	
-				duration: 1000,
-				iterations: 1,
-				fill: "forwards"
-			}
-		)
-		animationsArray.push(animation);
-		return animation.finished;
-	}
-
 	animationsArray.forEach((anim) => {
 		anim.cancel();
 	});
 }
 
 xxx();
+
+function roadAnimate(first, second) {
+	const animation = roadContainer.animate(
+		[
+			{transform: `translateX(${first})`},
+			{transform: `translateX(${second})`}
+		],
+		{
+			duration: 5000,
+			iterations: Infinity,
+		}
+	)
+	animationsArray.push(animation);
+	return animation.finished;
+}
+
+function carAnimate(first, second) {
+	const animation = car.animate(
+		[
+			{transform: `translateX(${first}px)`},
+			{transform: `translateX(${second}px)`}
+		],
+		{
+			duration: 2000,
+			iterations: 1,
+			fill: "forwards",
+		}
+	);
+	animationsArray.push(animation);
+	return animation.finished;
+	
+}
+
+function wheelsAnimate() {
+	let animations = [];
+
+	wheelContainers.forEach((wheel) => {
+
+		const animation = wheel.animate(
+		[
+			{ transform: "rotate(0deg)" },
+			{ transform: "rotate(-360deg)" },
+		],
+			{
+				duration: 1000,
+				iterations: Infinity,
+			}
+		)
+		animationsArray.push(animation);
+		animations.push(animation.finished);
+	});
+	return Promise.all(animations);
+}
+
+function windowAnimate(first, second) {
+	const animation = carWindow.animate(
+		[
+			{transform: `translateY(${first})`},
+			{transform: `translateY(${second})`}
+		],
+		{
+			duration: 1000,
+			iterations: 1,
+			fill: "forwards"
+		}
+	)
+	animationsArray.push(animation);
+	return animation.finished;
+}
+
+function girlAnimate(first, second) {
+	const animation = girl.animate(
+		[
+			{transform: `rotate(${first})`},
+			{transform: `rotate(${second})`},
+		],
+		{
+			duration: 1000,
+			iterations: 1,
+			fill: "forwards"
+		}
+	)
+	animationsArray.push(animation);
+	return animation.finished;
+}
+
+function handAnimate(first, second) {
+	const animation = hand.animate(
+		[
+			{transform: `rotate(${first})`},
+			{transform: `rotate(${second})`},
+		],
+		{	
+			duration: 1000,
+			iterations: 1,
+			fill: "forwards"
+		}
+	)
+	animationsArray.push(animation);
+	return animation.finished;
+}
 
 // window.addEventListener("keydown", (e) => {
 // 	if(e.code == "Space") {
