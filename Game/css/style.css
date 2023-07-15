@@ -1,0 +1,78 @@
+.area {
+	position: relative;
+	box-sizing: border-box;
+	width: 1200px;
+	height: 900px;
+	border: 1px solid rgb(51, 10, 235);
+	margin: 0 auto;
+}
+
+.play_filed {
+	display: inline-block;
+}
+
+.count_field {
+	display: inline-block;
+	position: absolute;
+	right: 125px;
+	top: 80px;
+}
+
+.figure {
+	display: inline-block;
+	position: absolute;
+	right: 130px;
+	top: 85px;
+	transition: viewBox 1s;
+}
+
+.count_list {
+	transform: translateY(0);
+	transition: transform 1s;
+}
+
+.keyboard {
+	display: block;
+	position: absolute;
+	right: 25px;
+	top: 458px;
+}
+
+.underlayer {
+	fill: black;
+	fill-opacity: 0.2;
+	stroke: #1DE019;
+	stroke-opacity: 0.5;
+}
+
+.background {
+	fill: #2c2c2c;
+	fill-opacity: 0.2;
+	stroke: #1DE019;
+	stroke-opacity: 0.5;
+}
+
+.button {
+	cursor: pointer;
+}
+
+.button.active .background {
+	filter: url("#inset-shadow");
+}
+
+.arrow {
+	fill: #2B2A29;
+	stroke: #1DE019;
+	stroke-opacity: 0.5;
+}
+
+.text {
+	fill: black;
+	font-family: 'Inter';
+	font-size: 32px;
+	text-align: center;
+	stroke: #1DE019;
+	stroke-width: 0.5;
+	stroke-opacity: 0.5;
+	user-select: none;
+}
