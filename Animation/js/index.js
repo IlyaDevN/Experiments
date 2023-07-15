@@ -24,6 +24,7 @@ async function animationStart() {
 	await windowAnimate("75%", "0", 1000);
 	await carAnimate(shift, shift * 2, 2000);
 	buttonStart.disabled = false;
+	buttonReset.disabled = true;
 }
 
 
