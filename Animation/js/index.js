@@ -9,24 +9,29 @@ const buttonReset = document.querySelector(".button_reset");
 const CAR_WIDTH = 700;
 const pageWidth = document.documentElement.clientWidth;
 const shift = -(CAR_WIDTH + (pageWidth - CAR_WIDTH) / 2);
-const animationsArray = [];
+const animations = [];
 
 async function animationStart() {
 
-	backgroundAnimate("-50%", "0", 9000);
-	wheelsAnimate(0, "-360deg", 3000);
-	await carAnimate(0, shift, 2000);
-	await windowAnimate("0", "75%", 1000);
-	await girlAnimate("-60deg", "0deg", 1000);
-	await handAnimate("-20deg", "40deg", 1000);
-	girlAnimate("0deg", "-60deg", 1000);
-	await handAnimate("40deg", "-20deg", 1000);
-	await windowAnimate("75%", "0", 1000);
-	await carAnimate(shift, shift * 2, 2000);
-	buttonStart.disabled = false;
-	buttonReset.disabled = true;
+	try {
+		backgroundAnimate("-50%", "0", 9000);
+		wheelsAnimate(0, "-360deg", 3000);
+		await carAnimate(0, shift, 2000);
+		await windowAnimate("0", "75%", 1000);
+		await girlAnimate("-60deg", "0deg", 1000);
+		await handAnimate("-20deg", "40deg", 1000);
+		girlAnimate("0deg", "-60deg", 1000);
+		await handAnimate("40deg", "-20deg", 1000);
+		await windowAnimate("75%", "0", 1000);
+		await carAnimate(shift, shift * 2, 2000);
+		buttonStart.disabled = false;
+		buttonReset.disabled = true;
+	} catch (error) {
+		if(error.name != "AbortError") {
+			throw(error);
+		}
+	}
 }
-
 
 buttonStart.addEventListener("click", () => {
 	buttonStart.disabled = true;
@@ -35,11 +40,11 @@ buttonStart.addEventListener("click", () => {
 })
 
 buttonReset.addEventListener("click", () => {
-	for (let anim of animationsArray) {
-		anim.cancel();
-		buttonStart.disabled = false;
-		buttonReset.disabled = true;
-	}
+	animations.forEach((animation) => {
+		animation.cancel();
+	})
+	buttonStart.disabled = false;
+	buttonReset.disabled = true;
 });
 
 function backgroundAnimate(first, second, time) {
@@ -53,7 +58,7 @@ function backgroundAnimate(first, second, time) {
 			iterations: 1,
 		}
 	)
-	animationsArray.push(animation);
+	animations.push(animation);
 	return animation.finished;
 }
 
@@ -69,13 +74,13 @@ function carAnimate(first, second, time) {
 			fill: "forwards",
 		}
 	);
-	animationsArray.push(animation);
+	animations.push(animation);
 	return animation.finished;
 
 }
 
 function wheelsAnimate(first, second, time) {
-	let animations = [];
+	const wheelsAnimations = [];
 
 	wheelContainers.forEach((wheel) => {
 
@@ -89,10 +94,10 @@ function wheelsAnimate(first, second, time) {
 				iterations: 3,
 			}
 		)
-		animationsArray.push(animation);
-		animations.push(animation.finished);
+		animations.push(animation);
+		wheelsAnimations.push(animation.finished);
 	});
-	return Promise.all(animations);
+	return Promise.all(wheelsAnimations);
 }
 
 function windowAnimate(first, second, time) {
@@ -107,7 +112,7 @@ function windowAnimate(first, second, time) {
 			fill: "forwards"
 		}
 	)
-	animationsArray.push(animation);
+	animations.push(animation);
 	return animation.finished;
 }
 
@@ -123,7 +128,7 @@ function girlAnimate(first, second, time) {
 			fill: "forwards"
 		}
 	)
-	animationsArray.push(animation);
+	animations.push(animation);
 	return animation.finished;
 }
 
@@ -139,6 +144,6 @@ function handAnimate(first, second, time) {
 			fill: "forwards"
 		}
 	)
-	animationsArray.push(animation);
+	animations.push(animation);
 	return animation.finished;
 }
